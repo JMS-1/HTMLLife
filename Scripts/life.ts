@@ -6,6 +6,7 @@
 
     var spielfeld = $('#spielfeld');
     var interval = $('#interval');
+    var schritteInfo = $('#schritte');
 
     var container = spielfeld.find('tbody');
     var zeilen = parseInt(container.attr('data-zeilen'));
@@ -31,9 +32,32 @@
     }
 
     var timerOn = false;
+    var start = $.now();
+    var schritte = 0;
+
+    // Anzahl der Schritte anzeigen
+    function schritteAnzeigen(): void {
+        var delta = $.now() - start;
+        var proSekunde = (delta > 0) ? Math.round(1000 * schritte / delta) : 0;
+
+        // Anzeigen
+        schritteInfo.text(proSekunde);
+
+        // Neu aufsetzen
+        start = $.now();
+        schritte = 0;
+
+        // Später noch einmal
+        window.setTimeout(schritteAnzeigen, 1000);
+    }
+
+    // Anzeige erstmalig vornehmen
+    schritteAnzeigen();
 
     // Hier wird die nächste Generation berechnet
     function schritt(): void {
+        schritte = schritte + 1;
+
         // Zuerst einmal schauen wir uns den IST Zustand an
         var vorher = $.map(container.find('td'),(zelle, zs) => {
             return {
@@ -61,10 +85,16 @@
 
         // Und nun nur noch abhängig von der Anzahl der Nachbarn den Zustand der Zelle verändern - oder belassen, wie er ist
         $.each(vorher,(zs, zelle) => {
-            if (zelle.nachbarn == 3)
-                zelle.zelle.setAttribute(nameZustand, zustandLebt);
-            else if (zelle.nachbarn != 2)
-                zelle.zelle.setAttribute(nameZustand, zustandTot);
+            if (zelle.nachbarn == 3) {
+                // Nur ändern wenn nötig
+                if (!zelle.lebt)
+                    zelle.zelle.setAttribute(nameZustand, zustandLebt);
+            }
+            else if (zelle.nachbarn != 2) {
+                // Nur ändern wenn nötig
+                if (zelle.lebt)
+                    zelle.zelle.setAttribute(nameZustand, zustandTot);
+            }
         });
 
         if (!timerOn)

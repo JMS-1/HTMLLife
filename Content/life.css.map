@@ -1,1 +1,1 @@
-﻿{"version":3,"sources":["life.less"],"names":[],"mappings":"AAAA;EACI,uBAAA;;AAMJ;EACI,yBAAA;;AAGJ;EACI,uBAAA;EACA,4BAAA;EACA,WAAA;EACA,WAAA;;AAGJ,EAAE;EACE,qBAAA","file":"life.css"}
+﻿{"version":3,"sources":["life.less"],"names":[],"mappings":"AAAA;EACI,uBAAA;;AAGJ;EACI,yBAAA;;AAGJ;EACI,uBAAA;EACA,WAAA;EACA,WAAA;EAGA,4BAAA;;AAGJ,EAAE;EAEE,qBAAA","file":"life.css"}
