@@ -59,22 +59,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\life.css">
-      <DependentUpon>life.less</DependentUpon>
-    </Content>
-    <Content Include="Content\life.min.css">
-      <DependentUpon>life.css</DependentUpon>
-    </Content>
     <Content Include="index.html" />
-    <Content Include="packages.config" />
-    <Content Include="Content\life.less" />
-    <Content Include="Content\life.css.map">
-      <DependentUpon>life.css</DependentUpon>
-    </Content>
-    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.3.js" />
-    <Content Include="Scripts\jquery-2.1.3.min.js" />
-    <Content Include="Scripts\jquery-2.1.3.min.map" />
+    <Content Include="life.css" />
+    <Content Include="life.js" />
     <Content Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -82,10 +69,6 @@
     <None Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\life.ts" />
-    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

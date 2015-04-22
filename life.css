@@ -1,16 +1,18 @@
 ﻿body {
   background-color: azure;
 }
+
 table {
   border-collapse: collapse;
 }
+
 td {
   border: 1px solid black;
   width: 10px;
   height: 8px;
   background-color: lightgreen;
 }
+
 td[data-zustand=lebt] {
   background-color: red;
 }
-/*# sourceMappingURL=life.css.map */
