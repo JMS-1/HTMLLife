@@ -6,12 +6,9 @@
     var zustandTot = 'tot';
 
     // Die wichtigsten visuellen Elemente ermitteln
-    var nameSpielfeld = '#spielfeld';
-    var nameContainer = nameSpielfeld + ' tbody';
-
-    var interval = document.getElementById('interval');
-    var container = document.querySelector(nameContainer);
+    var container = document.querySelector('#spielfeld tbody');
     var schritteInfo = document.getElementById('schritte');
+    var interval = document.getElementById('interval');
 
     // Die Größe des Spielfelds auslesen
     var zeilen = parseInt(container.getAttribute('data-zeilen'));
@@ -39,7 +36,7 @@
     container.innerHTML = html;
 
     // Hier merken wir uns alle Zellen
-    var alleZellen = document.querySelectorAll(nameContainer + ' td');
+    var alleZellen = container.querySelectorAll('td');
 
     // Und nun werden die initialisiert
     for (var zs = 0; zs < alleZellen.length; zs++) {
