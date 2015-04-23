@@ -3,7 +3,6 @@
     // Jede Zelle erhält die Information, ob sie lebt oder tot ist
     var nameZustand = 'data-zustand';
     var zustandLebt = 'lebt';
-    var zustandTot = 'tot';
 
     // Die wichtigsten visuellen Elemente ermitteln
     var container = document.querySelector('#spielfeld tbody');
@@ -14,13 +13,6 @@
     var zeilen = parseInt(container.getAttribute('data-zeilen'));
     var spalten = parseInt(container.getAttribute('data-spalten'));
 
-    // Wenn eine Zelle angeklickt wird ändert sie ihren Zustand
-    function manual() {
-        var zustand = (this.getAttribute(nameZustand) == zustandLebt) ? zustandTot : zustandLebt;
-
-        this.setAttribute(nameZustand, zustand);
-    }
-
     // Tabelle zusammenbauen
     var html = '';
 
@@ -28,7 +20,7 @@
         html += '<tr>';
 
         for (var s = 0; s < spalten; s++)
-            html += '<td />';
+            html += '<td onclick="zelleUmschalten(this)" ' + nameZustand + '=""/>';
 
         html += '</tr>';
     }
@@ -37,14 +29,6 @@
 
     // Hier merken wir uns alle Zellen
     var alleZellen = container.querySelectorAll('td');
-
-    // Und nun werden die initialisiert
-    for (var zs = 0; zs < alleZellen.length; zs++) {
-        var zelle = alleZellen[zs];
-
-        zelle.setAttribute(nameZustand, zustandTot);
-        zelle.onclick = manual;
-    }
 
     var start = new Date().getTime();
     var timerOn = false;
@@ -70,7 +54,7 @@
     schritteAnzeigen();
 
     // Hier wird die nächste Generation berechnet
-    function schritt() {
+    window.nächsteGeneration = function () {
         schritte = schritte + 1;
 
         // Zuerst einmal schauen wir uns den IST Zustand an
@@ -114,7 +98,7 @@
             else if (zelle.nachbarn != 2) {
                 // Nur ändern wenn nötig
                 if (zelle.lebt)
-                    zelle.zelle.setAttribute(nameZustand, zustandTot);
+                    zelle.zelle.setAttribute(nameZustand, '');
             }
         };
 
@@ -122,33 +106,37 @@
             return;
 
         // Auf Wunsch des Anwenders automatisch die nächste Generation berechnen
-        window.setTimeout(schritt, 1000 / Math.max(1, Math.min(1000, interval.value)));
+        window.setTimeout(nächsteGeneration, 1000 / Math.max(1, Math.min(1000, interval.value)));
     }
 
     // Das Spielfeld zufällig füllen
-    document.getElementById('random').onclick = function () {
+    window.spielfeldFüllen = function () {
         for (var zs = 0; zs < alleZellen.length; zs++) {
             var zelle = alleZellen[zs];
-            var zustand = (Math.random() <= 0.3) ? zustandLebt : zustandTot;
+            var zustand = (Math.random() <= 0.3) ? zustandLebt : '';
 
             zelle.setAttribute(nameZustand, zustand);
         };
     };
 
     // Das Spielfeld löschen
-    document.getElementById('clear').onclick = function () {
+    window.spielfeldLöschen = function () {
         for (var zs = 0; zs < alleZellen.length; zs++) {
-            alleZellen[zs].setAttribute(nameZustand, zustandTot);
+            alleZellen[zs].setAttribute(nameZustand, '');
         };
     };
 
-    // Die nächste Generation berechnen
-    document.getElementById('step').onclick = schritt;
-
     // Das ständige Berechnen von Generationen akivieren
-    document.getElementById('run').onclick = function () {
+    window.laufenLassenUmschalten = function () {
         timerOn = !timerOn;
-        schritt();
+        nächsteGeneration();
     };
+
+    // Wenn eine Zelle angeklickt wird ändert sie ihren Zustand
+    window.zelleUmschalten = function (zelle) {
+        var zustand = (zelle.getAttribute(nameZustand) == zustandLebt) ? '' : zustandLebt;
+
+        zelle.setAttribute(nameZustand, zustand);
+    }
 
 };
