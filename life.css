@@ -13,6 +13,6 @@ td {
   background-color: lightgreen;
 }
 
-td[data-zustand=lebt] {
+td.lebt {
   background-color: red;
 }
