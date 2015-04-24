@@ -88,7 +88,7 @@ function naechsteGeneration() {
         else if (zelle.nachbarn != 2) {
             // Nur ändern wenn nötig
             if (zelle.lebt)
-                zelle.zelle.className = null;
+                zelle.zelle.className = '';
         }
     };
 
@@ -116,7 +116,7 @@ function schritteAnzeigen() {
 // Wenn eine Zelle angeklickt wird ändert sie ihren Zustand
 function zelleUmschalten() {
     var zelle = event.srcElement;
-    var zustand = (zelle.className == cssLebt) ? null : cssLebt;
+    var zustand = (zelle.className == cssLebt) ? '' : cssLebt;
 
     zelle.className = zustand;
 }
@@ -124,7 +124,7 @@ function zelleUmschalten() {
 // Das Spielfeld löschen
 function spielfeldLoeschen() {
     for (var zs = 0; zs < alleZellen.length; zs++) {
-        alleZellen[zs].className = null;
+        alleZellen[zs].className = '';
     };
 };
 
@@ -132,7 +132,7 @@ function spielfeldLoeschen() {
 function spielfeldFuellen() {
     for (var zs = 0; zs < alleZellen.length; zs++) {
         var zelle = alleZellen[zs];
-        var zustand = (Math.random() <= 0.3) ? cssLebt : null;
+        var zustand = (Math.random() <= 0.3) ? cssLebt : '';
 
         zelle.className = zustand;
     };
