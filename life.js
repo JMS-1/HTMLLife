@@ -24,7 +24,7 @@ function seiteGeladen() {
         html += '<div class="zeile">';
 
         for (var s = 0; s < spalten; s++)
-            html += '<div class="' + cssTot + '" onclick="zelleUmschalten()"></div>';
+            html += '<div class="' + cssTot + '" onclick="zelleUmschalten(this)"></div>';
 
         html += '</div>';
     }
@@ -115,8 +115,7 @@ function schritteAnzeigen() {
 }
 
 // Wenn eine Zelle angeklickt wird ändert sie ihren Zustand
-function zelleUmschalten() {
-    var zelle = event.srcElement;
+function zelleUmschalten(zelle) {
     var zustand = (zelle.className == cssLebt) ? cssTot : cssLebt;
 
     zelle.className = zustand;
