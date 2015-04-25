@@ -1,5 +1,6 @@
 ﻿// Jede Zelle erhält die Information, ob sie lebt oder tot ist
-var cssLebt = 'lebt';
+var cssTot = 'zelle';
+var cssLebt = cssTot + ' lebt';
 
 // Die folgenden Variablen werden gesetzt, sobald die Seite geladen ist
 var schritteInfo, intervall, alleZellen, zeilen, spalten
@@ -12,7 +13,7 @@ function seiteGeladen() {
     intervall = document.getElementById('interval');
 
     // Die Spielfeld und dessen Größe auslesen
-    var spielfeld = document.querySelector('#spielfeld tbody');
+    var spielfeld = document.querySelector('#spielfeld');
     zeilen = parseInt(spielfeld.getAttribute('data-zeilen'));
     spalten = parseInt(spielfeld.getAttribute('data-spalten'));
 
@@ -20,19 +21,19 @@ function seiteGeladen() {
     var html = '';
 
     for (var z = 0; z < zeilen; z++) {
-        html += '<tr>';
+        html += '<div class="zeile">';
 
         for (var s = 0; s < spalten; s++)
-            html += '<td onclick="zelleUmschalten()" />';
+            html += '<div class="' + cssTot + '" onclick="zelleUmschalten()"></div>';
 
-        html += '</tr>';
+        html += '</div>';
     }
 
     // HTML Elemente auf einen Rutsch erzeugen lassen - das geht am schnellsten
     spielfeld.innerHTML = html;
 
     // Hier merken wir uns alle Zellen
-    alleZellen = spielfeld.querySelectorAll('td');
+    alleZellen = spielfeld.querySelectorAll('.' + cssTot);
 
     // Anzeige erstmalig vornehmen
     schritteAnzeigen();
@@ -88,7 +89,7 @@ function naechsteGeneration() {
         else if (zelle.nachbarn != 2) {
             // Nur ändern wenn nötig
             if (zelle.lebt)
-                zelle.zelle.className = '';
+                zelle.zelle.className = cssTot;
         }
     };
 
@@ -116,7 +117,7 @@ function schritteAnzeigen() {
 // Wenn eine Zelle angeklickt wird ändert sie ihren Zustand
 function zelleUmschalten() {
     var zelle = event.srcElement;
-    var zustand = (zelle.className == cssLebt) ? '' : cssLebt;
+    var zustand = (zelle.className == cssLebt) ? cssTot : cssLebt;
 
     zelle.className = zustand;
 }
@@ -124,7 +125,7 @@ function zelleUmschalten() {
 // Das Spielfeld löschen
 function spielfeldLoeschen() {
     for (var zs = 0; zs < alleZellen.length; zs++) {
-        alleZellen[zs].className = '';
+        alleZellen[zs].className = cssTot;
     };
 };
 
@@ -132,7 +133,7 @@ function spielfeldLoeschen() {
 function spielfeldFuellen() {
     for (var zs = 0; zs < alleZellen.length; zs++) {
         var zelle = alleZellen[zs];
-        var zustand = (Math.random() <= 0.3) ? cssLebt : '';
+        var zustand = (Math.random() <= 0.3) ? cssLebt : cssTot;
 
         zelle.className = zustand;
     };

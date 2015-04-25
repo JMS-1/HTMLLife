@@ -1,18 +1,24 @@
 ﻿body {
-  background-color: azure;
+    background-color: azure;
 }
 
-table {
-  border-collapse: collapse;
+div.spielfeld {
+    display: table;
+    border-collapse:collapse;
 }
 
-td {
-  border: 1px solid black;
-  width: 10px;
-  height: 8px;
-  background-color: lightgreen;
+div.zeile {
+    display: table-row;
 }
 
-td.lebt {
-  background-color: red;
+div.zelle {
+    display: table-cell;
+    border: 1px solid black;
+    background-color: lightgreen;
+    width: 12px;
+    height: 12px;
+}
+
+div.lebt {
+    background-color: red;
 }

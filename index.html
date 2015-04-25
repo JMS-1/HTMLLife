@@ -9,9 +9,7 @@
 </head>
 <body onload="seiteGeladen()">
     <h1><a href="http://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens" target="_blank">Conways Spiel des Lebens</a></h1>
-    <table id="spielfeld" class="spielfeld">
-        <tbody data-zeilen="50" data-spalten="50"></tbody>
-    </table>
+    <div id="spielfeld" class="spielfeld" data-zeilen="50" data-spalten="50"></div>
     <br />
     <input type="button" id="step" value="N&auml;chste Generation" onclick="naechsteGeneration()" />
     <input type="button" id="run" value="Immer weiter (an/aus)" onclick="laufenLassenUmschalten()" />
